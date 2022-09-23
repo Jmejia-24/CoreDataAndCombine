@@ -6,8 +6,8 @@
 //  Copyright © 2022 Byron Mejia. All rights reserved.
 //
 
-import Foundation
+import Combine
 
 public protocol JokeServiceDataPublisher {
-  
+    func publisher() -> AnyPublisher<Data, URLError>
 }
