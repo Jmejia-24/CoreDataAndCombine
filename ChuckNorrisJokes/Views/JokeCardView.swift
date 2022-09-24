@@ -10,6 +10,7 @@ import SwiftUI
 import ChuckNorrisJokesModel
 
 struct JokeCardView: View {
+    @ObservedObject var viewModel: JokesViewModel
     private var bounds: CGRect { UIScreen.main.bounds }
     
     private var repeatingAnimation: Animation {
@@ -20,7 +21,7 @@ struct JokeCardView: View {
     var body: some View {
         ZStack {
             VStack(alignment: .leading, spacing: 20) {
-                Text(ChuckNorrisJokesModel.Joke.starter.value)
+                Text(viewModel.joke.value)
                     .font(.largeTitle)
                     .foregroundColor(.primary)
                     .minimumScaleFactor(0.2)
@@ -38,7 +39,7 @@ struct JokeCardView: View {
 #if DEBUG
 struct JokeCardView_Previews: PreviewProvider {
     static var previews: some View {
-        JokeCardView()
+        JokeCardView(viewModel: JokesViewModel())
             .previewLayout(.sizeThatFits)
     }
 }
