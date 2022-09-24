@@ -34,3 +34,17 @@ extension JokeManagedObject {
         }
     }
 }
+
+extension Collection where Element == JokeManagedObject, Index == Int {
+    func delete(at indices: IndexSet, inViewContext viewContext: NSManagedObjectContext) {
+        indices.forEach { index in
+            viewContext.delete(self[index])
+        }
+        
+        do {
+            try viewContext.save()
+        } catch {
+            fatalError("\(#file), \(#function), \(error.localizedDescription)")
+        }
+    }
+}
