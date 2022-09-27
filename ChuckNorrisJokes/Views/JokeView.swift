@@ -10,6 +10,7 @@ import SwiftUI
 import ChuckNorrisJokesModel
 
 struct JokeView: View {
+    @Environment(\.managedObjectContext) private var viewContext
     @ObservedObject private var viewModel = JokesViewModel()
 
     @State private var showJokeView = false
@@ -110,6 +111,10 @@ struct JokeView: View {
                 cardTranslation = .zero
                 self.viewModel.reset()
             default:
+                if decisionState == .liked {
+                    JokeManagedObject.save(joke: viewModel.joke, inViewContext: viewContext)
+                }
+                
                 let translation = change.translation
                 let offset = (decisionState == .liked ? 2 : -2) * bounds.width
                 cardTranslation = CGSize(
