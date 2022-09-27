@@ -12,7 +12,7 @@ import ChuckNorrisJokesModel
 struct JokeView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @ObservedObject private var viewModel = JokesViewModel()
-
+    
     @State private var showJokeView = false
     @State private var showFetchingJoke = false
     @State private var cardTranslation: CGSize = .zero
@@ -52,13 +52,13 @@ struct JokeView: View {
         ZStack {
             NavigationView {
                 VStack {
-                    Spacer()
                     LargeInlineButton(title: "Show Saved") {
                         presentSavedJokes = true
                     }
                     .padding(20)
                 }
                 .navigationBarTitle("Chuck Norris Jokes")
+                .frame(maxHeight: .infinity, alignment: .bottom)
             }
             .sheet(isPresented: $presentSavedJokes) {
                 SavedJokesView()
@@ -90,9 +90,9 @@ struct JokeView: View {
                 .opacity(viewModel.decisionState == .liked ? hudOpacity : 0)
                 .animation(.easeInOut)
         }
-        .onAppear(perform: {
-            self.reset()
-        })
+        .onAppear {
+            reset()
+        }
     }
     
     private func updateDecisionStateForChange(_ change: DragGesture.Value) {

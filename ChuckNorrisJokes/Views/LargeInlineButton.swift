@@ -18,7 +18,7 @@ struct LargeInlineButton: View {
             .scaleEffect(0.8)
             .font(.title)
             .foregroundColor(color)
-            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 60, alignment: .center)
+            .frame(maxWidth: .infinity, maxHeight: 60)
             .clipShape(RoundedRectangle(cornerRadius: 10))
             .overlay(RoundedRectangle(cornerRadius: 10).stroke(color, lineWidth: 2))
             .padding(.leading, 20)

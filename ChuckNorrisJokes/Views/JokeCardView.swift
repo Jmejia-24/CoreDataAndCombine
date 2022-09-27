@@ -26,7 +26,6 @@ struct JokeCardView: View {
                     .foregroundColor(.primary)
                     .minimumScaleFactor(0.2)
                     .allowsTightening(true)
-                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
                     .animation(.easeInOut)
             }
             .frame(width: min(300, bounds.width * 0.7), height: min(400, bounds.height * 0.6))

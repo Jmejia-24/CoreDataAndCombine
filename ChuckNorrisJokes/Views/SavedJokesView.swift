@@ -16,18 +16,16 @@ struct SavedJokesView: View {
     private var jokes: FetchedResults<JokeManagedObject>
 
     var body: some View {
-        VStack {
-            NavigationView {
-                List {
-                    ForEach(jokes, id: \.self) { joke in
-                        Text(joke.value ?? "N/A")
-                    }
-                    .onDelete { indices in
-                        jokes.delete(at: indices, inViewContext: viewContext)
-                    }
+        NavigationView {
+            List {
+                ForEach(jokes, id: \.self) { joke in
+                    Text(joke.value ?? "N/A")
                 }
-                .navigationBarTitle("Saved Jokes")
+                .onDelete { indices in
+                    jokes.delete(at: indices, inViewContext: viewContext)
+                }
             }
+            .navigationBarTitle("Saved Jokes")
         }
     }
 }
